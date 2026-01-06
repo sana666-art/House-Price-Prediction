@@ -75,70 +75,70 @@ model.fit(X_train_scaled, y_train)
 # -----------------------------
 # Sidebar Inputs
 # -----------------------------
-st.sidebar.header("🏗️ House Features")
+st.sidebar.header("🏠 House Features")
 
-MedInc = st.sidebar.slider(
-    "Median Income (10k USD)", 
-    float(X["MedInc"].min()), 
-    float(X["MedInc"].max()), 
-    float(X["MedInc"].mean())
+longitude = st.sidebar.slider(
+    "Longitude",
+    float(X["longitude"].min()),
+    float(X["longitude"].max()),
+    float(X["longitude"].mean())
 )
 
-HouseAge = st.sidebar.slider(
-    "House Age (years)", 
-    float(X["HouseAge"].min()), 
-    float(X["HouseAge"].max()), 
-    float(X["HouseAge"].mean())
+latitude = st.sidebar.slider(
+    "Latitude",
+    float(X["latitude"].min()),
+    float(X["latitude"].max()),
+    float(X["latitude"].mean())
 )
 
-AveRooms = st.sidebar.slider(
-    "Average Rooms", 
-    float(X["AveRooms"].min()), 
-    float(X["AveRooms"].max()), 
-    float(X["AveRooms"].mean())
+housing_median_age = st.sidebar.slider(
+    "Housing Median Age",
+    float(X["housing_median_age"].min()),
+    float(X["housing_median_age"].max()),
+    float(X["housing_median_age"].mean())
 )
 
-AveBedrms = st.sidebar.slider(
-    "Average Bedrooms", 
-    float(X["AveBedrms"].min()), 
-    float(X["AveBedrms"].max()), 
-    float(X["AveBedrms"].mean())
+total_rooms = st.sidebar.slider(
+    "Total Rooms",
+    float(X["total_rooms"].min()),
+    float(X["total_rooms"].max()),
+    float(X["total_rooms"].mean())
 )
 
-Population = st.sidebar.slider(
-    "Population", 
-    float(X["Population"].min()), 
-    float(X["Population"].max()), 
-    float(X["Population"].mean())
+total_bedrooms = st.sidebar.slider(
+    "Total Bedrooms",
+    float(X["total_bedrooms"].min()),
+    float(X["total_bedrooms"].max()),
+    float(X["total_bedrooms"].mean())
 )
 
-AveOccup = st.sidebar.slider(
-    "Average Occupancy", 
-    float(X["AveOccup"].min()), 
-    float(X["AveOccup"].max()), 
-    float(X["AveOccup"].mean())
+population = st.sidebar.slider(
+    "Population",
+    float(X["population"].min()),
+    float(X["population"].max()),
+    float(X["population"].mean())
 )
 
-Latitude = st.sidebar.slider(
-    "Latitude", 
-    float(X["Latitude"].min()), 
-    float(X["Latitude"].max()), 
-    float(X["Latitude"].mean())
+households = st.sidebar.slider(
+    "Households",
+    float(X["households"].min()),
+    float(X["households"].max()),
+    float(X["households"].mean())
 )
 
-Longitude = st.sidebar.slider(
-    "Longitude", 
-    float(X["Longitude"].min()), 
-    float(X["Longitude"].max()), 
-    float(X["Longitude"].mean())
+median_income = st.sidebar.slider(
+    "Median Income",
+    float(X["median_income"].min()),
+    float(X["median_income"].max()),
+    float(X["median_income"].mean())
 )
 
 # -----------------------------
 # Prediction
 # -----------------------------
 input_data = np.array([
-    MedInc, HouseAge, AveRooms, AveBedrms,
-    Population, AveOccup, Latitude, Longitude
+    longitude, latitude, housing_median_age, total_rooms,
+    total_bedrooms, population, households, median_income
 ]).reshape(1, -1)
 
 input_scaled = scaler.transform(input_data)
