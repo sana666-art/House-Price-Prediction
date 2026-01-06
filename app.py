@@ -136,10 +136,26 @@ median_income = st.sidebar.slider(
 # -----------------------------
 # Prediction
 # -----------------------------
-input_data = np.array([
-    longitude, latitude, housing_median_age, total_rooms,
-    total_bedrooms, population, households, median_income
-]).reshape(1, -1)
+# Create input dataframe from user inputs
+input_data = pd.DataFrame([{
+    "longitude": longitude,
+    "latitude": latitude,
+    "housing_median_age": housing_median_age,
+    "total_rooms": total_rooms,
+    "total_bedrooms": total_bedrooms,
+    "population": population,
+    "households": households,
+    "median_income": median_income
+}])
+
+# Add missing dummy columns (from one-hot encoding)
+for col in X.columns:
+    if col not in input_data.columns:
+        input_data[col] = 0
+
+# Ensure correct column order
+input_data = input_data[X.columns]
+
 
 input_scaled = scaler.transform(input_data)
 prediction = model.predict(input_scaled)[0]
