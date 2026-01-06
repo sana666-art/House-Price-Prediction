@@ -25,6 +25,26 @@ st.write("Predict house prices using **Linear Regression**")
 @st.cache_data
 def load_data():
     df = pd.read_csv("data/housing.csv")
+
+    # -----------------------------
+    # data Preprocessing
+    # -----------------------------
+
+    # Step 1:
+    # Fill numeric missing values with median
+    numeric_cols = df.select_dtypes(include=['float64', 'int64']).columns
+    for col in numeric_cols:
+        df[col].fillna(df[col].median(), inplace=True)
+
+    # Step 2:
+    # Fill missing categorical values
+    df['ocean_proximity'].fillna('UNKNOWN', inplace=True)
+
+
+    # Step 3:
+    # Encode categorical column
+    df = pd.get_dummies(df, columns=['ocean_proximity'], drop_first=True)
+
     return df
 
 df = load_data()
@@ -34,6 +54,9 @@ df = load_data()
 # -----------------------------
 X = df.drop("median_house_value", axis=1)
 y = df["median_house_value"]
+
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
 
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42
